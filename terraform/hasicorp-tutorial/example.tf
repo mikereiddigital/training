@@ -9,11 +9,17 @@ terraform {
 
 provider "aws" {
   profile = "default"
-  region  = "eu-west-2"
+  region  = var.region
 }
 
 resource "aws_instance" "example" {
   ami           = "ami-0a669382ea0feb73a"
-  instance_type = "t2.micro"
-  subnet_id     = "subnet-7aa67d37"
+  instance_type = var.instance_type
+  subnet_id     = var.subnet_id
+
+  tags = {
+    Name = var.name,
+    New = "Tag"
+  }
+
 }
